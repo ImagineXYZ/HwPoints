@@ -59,6 +59,7 @@ animateApp.config(function($routeProvider) {
 
 });
 
+
 // DIRECTIVES =============================================
 
 animateApp.directive('loginDirective', function () {
@@ -103,7 +104,11 @@ animateApp.directive('recolectoresDirective', function () {
 
 // CONTROLLERS ============================================
 // login controller
-animateApp.controller('loginController', function($scope, $http, $window, localStorage, $location) {
+animateApp.controller('loginController', function($scope, $http, $window, localStorage, $location, $rootScope) {
+    if($window.orientation === undefined){}
+    else{
+        $rootScope.bodylayout = 'mobile'; 
+    }
     $scope.user = {};
     $window.scrollTo(0, 0);
     $scope.pageClass = 'page-login';
@@ -113,13 +118,14 @@ animateApp.controller('loginController', function($scope, $http, $window, localS
     $scope.next = function(path){
         $location.path(path);
     };
+
     $scope.addReview = function(path){
         $http.post("login", $scope.user)
             .success(function(data, status, headers, config) {
                 console.log(data);
                 $scope.data = data;
                 amplify.store("User", data);
-                $location.path('magnetos');
+                $location.path('home');
         }).error(function(data, status, headers, config) {
                 alert('Datos Erroneos.');
                 $scope.status = status;
@@ -129,9 +135,13 @@ animateApp.controller('loginController', function($scope, $http, $window, localS
 });
 
 // home controller
-animateApp.controller('mainController', function($scope, $window) {
+animateApp.controller('mainController', function($scope, $window, $location) {
     $window.scrollTo(0, 0);
     $scope.pageClass = 'page-home';
+
+    $scope.next = function(path){
+        $location.path(path);
+    };
 });
 
 // magnetos controller

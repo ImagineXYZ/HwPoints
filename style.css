@@ -22,6 +22,10 @@ body{
     text-align: center;
     color: #E6E6E6;
     font-size: 16px;
+    max-width: 100vw;
+}
+.mobile{
+  background: url(back-mobile.png);
 }
 h1, h2, h3, h4, label{
     font-family: GOTHIC;
@@ -41,10 +45,7 @@ img{
     background: -moz-linear-gradient(right, #333333, #1a1a1a); /* For Firefox 3.6 to 15 */
     background: linear-gradient(to right, #333333, #1a1a1a); /* Standard syntax (must be last) */
 }
-.page-login{
-    background: transparent;
-}
-.page-contact{
+.page-login, .page-contact, .page-home{
     background: transparent;
 }
 
@@ -270,6 +271,10 @@ text{
   font-weight: bold;
 }
 
+select{
+  color: black;
+}
+
 .c1 path {
   stroke-dashoffset: 0.5;
 }
@@ -330,7 +335,7 @@ text{
     margin-left: 5px;
     font-family: GOTHIC;
     color: black;
-    border-width: 3px;
+    border-width: 2px;
     border-style: solid;
     -webkit-border-image: 
       -webkit-gradient(linear, 100% 0, 0 0, from(#F13A2A), to(#F15D2A)) 1;
@@ -359,5 +364,5 @@ text{
     font-family: GOTHIC;
     width: 50%;
     margin: auto;
-    padding-top: 25px
+    padding-top: 15px
 }

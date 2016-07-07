@@ -20,11 +20,12 @@
 </head>
 
 <!-- apply our angular app -->
-<body ng-app="animateApp">
+<body ng-app="animateApp" class="{{bodylayout}}">
     <!-- inject our views using ng-view -->
     <!-- each angular controller applies a different class here -->
     <div class="page {{ pageClass }}" ng-view></div>
-    <br>
-    <img src="imagine.png"/>        
+    <br><br>
+    <img src="imagine.png"/> 
+    <br>       
 </body>
 </html>
