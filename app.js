@@ -543,3 +543,16 @@ animateApp.controller('contactController', function($scope) {
     console.log(totalGrades);
     $scope.pageClass = 'page-contact';
 });
+
+/*
+Quitar Items
+Constantes de Materiales por Item
+
+Auxiliar Presupuesto
+-Totalidad Materiales
+    -Mano Obra
+    -Costo Materiales
+-Resumen de Presupuesto
+    -Cargas Sociales 0.43 por Mano de Obra por Contratos
+    -Miscelaneos 
+*/

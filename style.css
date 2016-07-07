@@ -372,3 +372,11 @@ select{
     margin: auto;
     padding-top: 15px
 }
+@media (max-width: 699px){
+  .img-points{
+    width: 200px;
+  }
+  .input-points{
+    width: 300px;
+  }
+}
