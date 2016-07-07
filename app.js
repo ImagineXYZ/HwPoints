@@ -10,8 +10,19 @@ animateApp.config(function($routeProvider) {
 
     $routeProvider
 
-        // home page
+        // login
         .when('/', {
+            template: '<login-directive></login-directive>',
+            controller: 'loginController'
+        })
+
+        .when('/login', {
+            template: '<login-directive></login-directive>',
+            controller: 'loginController'
+        })
+
+        // home
+        .when('/home', {
             templateUrl: 'page-home.html',
             controller: 'mainController'
         })
@@ -40,8 +51,8 @@ animateApp.config(function($routeProvider) {
             controller: 'recolectoresController'
         })
 
-        // contact page
-        .when('/contact', {
+        // contact
+        .when('/done', {
             templateUrl: 'page-contact.html',
             controller: 'contactController'
         });
@@ -49,6 +60,14 @@ animateApp.config(function($routeProvider) {
 });
 
 // DIRECTIVES =============================================
+
+animateApp.directive('loginDirective', function () {
+  return {
+    restrict: 'E',
+    scope: true,
+    templateUrl: 'page-login.html'
+  }; 
+});
 
 animateApp.directive('magnetosDirective', function () {
   return {
@@ -83,8 +102,35 @@ animateApp.directive('recolectoresDirective', function () {
 });  
 
 // CONTROLLERS ============================================
+// login controller
+animateApp.controller('loginController', function($scope, $http, $window, localStorage, $location) {
+    $scope.user = {};
+    $window.scrollTo(0, 0);
+    $scope.pageClass = 'page-login';
+
+    amplify.store("User", null);
+    
+    $scope.next = function(path){
+        $location.path(path);
+    };
+    $scope.addReview = function(path){
+        $http.post("login", $scope.user)
+            .success(function(data, status, headers, config) {
+                console.log(data);
+                $scope.data = data;
+                amplify.store("User", data);
+                $location.path('magnetos');
+        }).error(function(data, status, headers, config) {
+                alert('Datos Erroneos.');
+                $scope.status = status;
+        });
+        //$location.path(path);
+    };
+});
+
 // home controller
-animateApp.controller('mainController', function($scope) {
+animateApp.controller('mainController', function($scope, $window) {
+    $window.scrollTo(0, 0);
     $scope.pageClass = 'page-home';
 });
 
@@ -375,7 +421,7 @@ animateApp.controller('tonticosController', function($scope, $window, $location)
 });
 
 // recolectores controller
-animateApp.controller('recolectoresController', function($scope, $window, $location) {
+animateApp.controller('recolectoresController', function($scope, $http, $window, localStorage, $location) {
     $window.scrollTo(0, 0);
     $scope.pageClass = 'page-recolectores';
     if($window.orientation === undefined){
@@ -465,7 +511,20 @@ animateApp.controller('recolectoresController', function($scope, $window, $locat
     $scope.next = function(path){
         var recolectoresGrades = {grade1:$scope.grade1, grade2:$scope.grade2, grade3:$scope.grade3, grade4:$scope.grade4};
         totalGrades['recolectores']=recolectoresGrades;
-        $location.path(path);
+        var user = amplify.store("User");
+        console.log(user);
+        $http.post("grade", totalGrades)
+            .success(function(data, status, headers, config) {
+                console.log(data);
+                $scope.data = data;
+                alert('Datos Enviados.');
+                //amplify.store("User", data);
+                $location.path('done');
+        }).error(function(data, status, headers, config) {
+                alert('Datos No Enviados. Por Favor Intente de Nuevo');
+                $scope.status = status;
+        });
+        //$location.path(path);
     };
 });
 

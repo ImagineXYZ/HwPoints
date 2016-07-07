@@ -1,14 +1,51 @@
 /* make our pages be full width and full height */
 /* positioned absolutely so that the pages can overlap each other as they enter and leave */
-body{
-	margin: 50px;
-    background: url(back.png) repeat;
-    border: 5px solid #F15D2A;
-    text-align: center;
+@font-face {
+    font-family: MyriadPro-Regular;
+    src: url(MyriadPro-Regular.otf);
 }
-.page{
-    bottom:0; 
+@font-face {
+    font-family: GOTHICB;
+    src: url(GOTHICB.TTF);
+}
+@font-face {
+    font-family: GOTHIC;
+    src: url(GOTHIC.TTF);
+}
+
+body{
+    margin-top: 15vh;
+    background: url(back.png);
+    background-repeat: no-repeat;
+    background-size: 100vw 100vh;
+    background-attachment: fixed;
+    text-align: center;
+    color: #E6E6E6;
+    font-size: 16px;
+}
+h1, h2, h3, h4, label{
+    font-family: GOTHIC;
+    
+}
+img{
+  max-width: 80%;
+}
+.page
+{
     text-align:center;
+    width: 55vw;
+    margin: auto;
+    background: black; /* For browsers that do not support gradients */
+    background: -webkit-linear-gradient(left, #333333, #1a1a1a); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(right, #333333, #1a1a1a); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(right, #333333, #1a1a1a); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(to right, #333333, #1a1a1a); /* Standard syntax (must be last) */
+}
+.page-login{
+    background: transparent;
+}
+.page-contact{
+    background: transparent;
 }
 
 /* PAGES (specific colors for each page)
@@ -157,7 +194,6 @@ input[type=range]:focus::-ms-fill-upper {
 }
 
 .demo-container {
-  width: 100vw;
   background: transparent;
   background: transparent;
   display: -webkit-box;
@@ -209,7 +245,6 @@ input[type=range]:focus::-ms-fill-upper {
   overflow: hidden;
   padding: 5px;
   margin: 5px;
-  margin-left: -145px;
   cursor: pointer;
 }
 
@@ -223,10 +258,16 @@ path {
   stroke-width: 15px;
   stroke-linecap: round;
   stroke-dasharray: 123, 1400;
-  fill: none;
   -webkit-transition: all 0.5s ease;
   transition: all 0.5s ease;
-  fill: rgba(0,0,255,.2);
+  fill: #E6E6E6;
+}
+
+text{
+  fill: black;
+  font-size: 50px;
+  font-family: MyriadPro-Regular;
+  font-weight: bold;
 }
 
 .c1 path {
@@ -268,12 +309,55 @@ path {
 .c10 path {
   stroke-dashoffset: -1395;
 }
-
-.gradeNumbers{    
-  position: absolute;
-  font-size: 22px;
-  margin-top: -53px;
-  margin-left: -262px;
-  cursor: pointer;
-  z-index: -1;
+.buttton-points{
+    width: 20vw;
+    height: 40px;
+    font-size: 20px;
+    color: white;
+    font-family: MyriadPro-Regular;
+    border: none;
+    background: black; /* For browsers that do not support gradients */
+    background: -webkit-linear-gradient(left, #F13A2A, #F15D2A); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(right, #F13A2A, #F15D2A); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(right, #F13A2A, #F15D2A); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(to right, #F13A2A, #F15D2A); /* Standard syntax (must be last) */
+}
+.input-points{
+    width: 20vw;
+    height: 40px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: 5px;
+    font-family: GOTHIC;
+    color: black;
+    border-width: 3px;
+    border-style: solid;
+    -webkit-border-image: 
+      -webkit-gradient(linear, 100% 0, 0 0, from(#F13A2A), to(#F15D2A)) 1;
+    -webkit-border-image: 
+      -webkit-linear-gradient(right, #F13A2A, #F15D2A) 1;
+    -moz-border-image:
+      -moz-linear-gradient(right, #F13A2A, #F15D2A) 1;  
+    -o-border-image:
+      -o-linear-gradient(right, #F13A2A, #F15D2A) 1;
+    border-image:
+      linear-gradient(to right, #F13A2A, #F15D2A) 1; 
+}
+.img-points{
+    width: 10vw;
+    min-width: 100px;
+    margin-bottom: 15vh;
+}
+.title-points{
+    font-family: GOTHIC;
+    border-bottom: orange 1px solid;
+    width: 50%;
+    margin: auto;
+    padding-top: 25px
+}
+.thank-points{
+    font-family: GOTHIC;
+    width: 50%;
+    margin: auto;
+    padding-top: 25px
 }

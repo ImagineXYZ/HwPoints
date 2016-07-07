@@ -6,20 +6,9 @@
 //Required Modules
 var express = require('express'),
     cookieParser = require('cookie-parser'),
-    bodyParser = require('body-parser');
+    bodyParser = require('body-parser'),
+    dbServices = require('./database');
 
-/*
-Seconds: 0-59
-Minutes: 0-59
-Hours: 0-23
-Day of Month: 1-31
-Months: 0-11
-Day of Week: 0-6*/
-/*new cronJob('0 59 * * * *', function(){
-        //console.log("CronJob")
-        organizationImagine.hourScript();
-    }, null, true, null);
- */
 
 var app = express();
 app.use(express.logger('dev'));     /* 'default', 'short', 'tiny', 'dev' */
@@ -28,6 +17,10 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(bodyParser.json());
 app.use(express.static(__dirname));
+
+app.post('/users', dbServices.insertUser);
+app.post('/grade', dbServices.insertGrades);
+app.post('/login', dbServices.loginUser);
 
 app.get('*', function (req, res) {
     res.redirect('../#home', 404);
