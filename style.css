@@ -34,6 +34,9 @@ h1, h2, h3, h4, label{
 img{
   max-width: 80%;
 }
+.img-imagine{
+  margin-bottom: 25px;
+}
 .page
 {
     text-align:center;
