@@ -384,6 +384,7 @@ select{
   }
   .title-points{
     width: auto;
+    font-size: 24px;
   }
   select{
     width: 50%;
