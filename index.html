@@ -21,12 +21,14 @@
 </head>
 
 <!-- apply our angular app -->
-<body ng-app="animateApp" class="{{bodylayout}}">
+<body ng-app="animateApp">
     <!-- inject our views using ng-view -->
     <!-- each angular controller applies a different class here -->
     <div class="page {{ pageClass }}" ng-view></div>
     <br><br>
     <img src="imagine.png" class="img-imagine"/> 
     <br>       
+    <div id="fullBody"  class="{{bodylayout}}">
+    </div>
 </body>
 </html>
