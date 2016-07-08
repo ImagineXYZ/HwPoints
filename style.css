@@ -377,6 +377,15 @@ select{
     width: 40vw;
   }
   .input-points{
-    width: 60vw;
+    width: 50vw;
+  }
+  .buttton-points{
+    width: 50vw; 
+  }
+  .title-points{
+    width: auto;
+  }
+  select{
+    width: 50%;
   }
 }
