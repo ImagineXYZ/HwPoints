@@ -374,9 +374,9 @@ select{
 }
 @media (max-width: 699px){
   .img-points{
-    width: 200px;
+    width: 40vw;
   }
   .input-points{
-    width: 300px;
+    width: 60vw;
   }
 }
