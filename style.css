@@ -376,13 +376,10 @@ select{
   .img-points{
     width: 40vw;
   }
-  .input-points{
-    width: 50vw;
-  }
-  .buttton-points{
+  .input-points, .buttton-points{
     width: 50vw; 
   }
-  .title-points{
+  .title-points, .thank-points{
     width: auto;
   }
   h2,h3{
