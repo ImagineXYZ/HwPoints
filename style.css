@@ -2,15 +2,15 @@
 /* positioned absolutely so that the pages can overlap each other as they enter and leave */
 @font-face {
     font-family: MyriadPro-Regular;
-    src: url(MyriadPro-Regular.otf);
+    src: url(./fonts/MyriadPro-Regular.otf);
 }
 @font-face {
     font-family: GOTHICB;
-    src: url(GOTHICB.TTF);
+    src: url(./fonts/GOTHICB.TTF);
 }
 @font-face {
     font-family: GOTHIC;
-    src: url(GOTHIC.TTF);
+    src: url(./fonts/GOTHIC.TTF);
 }
 
 body{
@@ -25,7 +25,7 @@ body{
     left:0;
     height: 100%;
     width: 100%;
-    background: url(back.png);
+    background: url(./img/back.png);
     background-repeat: no-repeat;
     background-size: 100% 100%;
     background-attachment: fixed;
@@ -33,7 +33,7 @@ body{
 }
 .mobile{
     height: 110%  !important;
-    background: url(back-mobile.png) !important;
+    background: url(./img/back-mobile.png) !important;
     background-repeat: no-repeat  !important;
     background-size: 100% 100% !important;
     background-attachment: fixed  !important;
@@ -59,7 +59,7 @@ img{
     background: -moz-linear-gradient(right, #333333, #1a1a1a); /* For Firefox 3.6 to 15 */
     background: linear-gradient(to right, #333333, #1a1a1a); /* Standard syntax (must be last) */
 }
-.page-login, .page-contact, .page-home{
+.page-login, .page-done, .page-home{
     background: transparent;
 }
 

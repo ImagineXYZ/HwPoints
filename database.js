@@ -64,6 +64,10 @@ exports.loginUser = function(req, res) {
         cipher.update(resource.pass, 'utf8', 'base64');
         var pass = cipher.final('base64');
         if(doc.pass === pass){
+          var userId = doc._id;
+          db.collection('Users').update({_id:userId}, {$inc:{logged:1}}, {upsert: true, new: true},function(err2, doc2) {
+          });
+          doc.pass = '##############';
           res.send(200, doc);
         }
         else{
@@ -78,15 +82,24 @@ exports.loginUser = function(req, res) {
 };
 
 exports.insertGrades = function(req, res) {
-    console.log(req.body);
-    res.send(200,true);
-    /*var resource = req.body;
-    db.collection('Ids').findAndModify({_id:1},{},{$inc:{schedule:1}},function(err, doc_ids) {
-        if(err) {throw err;res.send(400, err);};
-        resource["_id"] = doc_ids.value.schedule;
-        db.collection('Schedule').insert(resource, function(error, doc_project){
-            if(error) {throw error;res.send(400, error);};
-            res.send(200, resource);
-        })
-    });*/
+  console.log(req.body);
+  var userId = req.body.user._id;
+  var grades = req.body.grades;
+  db.collection('Users').findAndModify({_id:userId},{},{$inc:{sent:1}, $set:{grades:grades}},function(err, doc) {
+      if(err) {throw err;res.send(400, err);}
+      else if(doc.value.sent>0){res.send(403, {'error':'Multiple Calificación'});}
+      else{
+        db.collection('Ids').findAndModify({_id:1},{},{$inc:{grades:1}},function(err_ids, doc_ids) {
+            console.log(doc.value);
+            if(err_ids) {throw err_ids;res.send(400, err_ids);}
+            else{
+              grades['_id'] = doc_ids.value.grades;
+              db.collection('Grades').insert(grades, function(error, doc_grades){
+                  if(error) {throw error;res.send(400, error);};
+                  res.send(200, grades);
+              })
+            }
+        });
+      }
+  });
 }
