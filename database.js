@@ -63,17 +63,17 @@ exports.loginUser = function(req, res) {
         var cipher = crypto.createCipher('aes-256-cbc', key);
         cipher.update(resource.pass, 'utf8', 'base64');
         var pass = cipher.final('base64');
-        res.send(200,true);
-        /*if(doc.pass === pass){
+        if(doc.pass === pass){
+          res.send(200,true);/*
           var userId = doc._id;
           db.collection('Users').update({_id:userId}, {$inc:{logged:1}}, {upsert: true, new: true},function(err2, doc2) {
           });
           doc.pass = '##############';
-          res.send(200, doc);
+          res.send(200, doc);*/
         }
         else{
           res.send(400, false);  
-        }*/
+        }
       }
       else{
         res.send(400, false);  
