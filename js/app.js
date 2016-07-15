@@ -246,7 +246,6 @@ animateApp.controller('loginController', function($scope, $http, $window, localS
                 alert('Datos Erroneos.');
                 $scope.status = status;
         });
-        //$location.path(path);
     };
 });
 
