@@ -64,7 +64,7 @@ exports.loginUser = function(req, res) {
         cipher.update(resource.pass, 'utf8', 'base64');
         var pass = cipher.final('base64');
         if(doc.pass === pass){
-          res.send(200,true);/*
+          res.send(200,doc);/*
           var userId = doc._id;
           db.collection('Users').update({_id:userId}, {$inc:{logged:1}}, {upsert: true, new: true},function(err2, doc2) {
           });
