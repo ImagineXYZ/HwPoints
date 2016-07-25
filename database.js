@@ -75,8 +75,8 @@ exports.loginUser = function(req, res) {
             else{
               doc.pass = '##############';
               res.send(200, doc);
-            }*/
-          });
+            }
+          });*/
         }
         else{
           res.send(400, false);  
