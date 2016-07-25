@@ -76,11 +76,11 @@ exports.loginUser = function(req, res) {
               doc.pass = '##############';
               res.send(200, doc);
             }
-          });*/
+          });
         }
         else{
           res.send(400, false);  
-        }
+        }*/
       }
       else{
         res.send(400, false);  
