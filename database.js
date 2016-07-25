@@ -50,7 +50,8 @@ exports.insertUser = function(req, res) {
 
 exports.loginUser = function(req, res) {
   var resource = req.body;
-  if(resource.email === undefined || resource.pass === undefined){
+  res.send(200, resource);
+  /*if(resource.email === undefined || resource.pass === undefined){
     res.send(400, false);
   }
   else{
@@ -84,7 +85,7 @@ exports.loginUser = function(req, res) {
         res.send(400, false);  
       }
     });
-  }
+  }*/
 };
 
 exports.insertGrades = function(req, res) {

@@ -222,15 +222,13 @@ animateApp.controller('loginController', function($scope, $http, $window, localS
     $scope.pageClass = 'page-login';
 
     amplify.store("User", null);
-    
-    $scope.next = function(path){
-        $location.path(path);
-    };
 
-    $scope.addReview = function(path){
+    $scope.loginUser = function(){
+        console.log($scope.user);
         $http.post("login", $scope.user)
             .success(function(data, status, headers, config) {
                 if(data.sent === 0){
+                    console.log(data);
                     $scope.data = data;
                     userTeam = data.team;
                     teamsArray.splice(userTeam-1,1);
@@ -239,10 +237,12 @@ animateApp.controller('loginController', function($scope, $http, $window, localS
                     $location.path('home');
                 }
                 else{
+                    console.log(data);
                     $scope.user = {};
                     alert('Éste usuario ya realizó la calificación.');
                 }
         }).error(function(data, status, headers, config) {
+                console.log(data);
                 alert('Datos Erroneos.');
                 $scope.status = status;
         });
