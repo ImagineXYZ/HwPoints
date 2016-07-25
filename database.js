@@ -50,8 +50,7 @@ exports.insertUser = function(req, res) {
 
 exports.loginUser = function(req, res) {
   var resource = req.body;
-  res.send(200, resource);
-  /*if(resource.email === undefined || resource.pass === undefined){
+  if(resource.email === undefined || resource.pass === undefined){
     res.send(400, false);
   }
   else{
@@ -61,7 +60,9 @@ exports.loginUser = function(req, res) {
         res.send(400, err);
       }
       else if(doc != null){
-        var cipher = crypto.createCipher('aes-256-cbc', key);
+
+        res.send(200, doc);
+        /*var cipher = crypto.createCipher('aes-256-cbc', key);
         cipher.update(resource.pass, 'utf8', 'base64');
         var pass = cipher.final('base64');
         if(doc.pass === pass){
@@ -75,7 +76,7 @@ exports.loginUser = function(req, res) {
               doc.pass = '##############';
               res.send(200, doc);
             }
-          });
+          });*/
         }
         else{
           res.send(400, false);  
@@ -85,7 +86,7 @@ exports.loginUser = function(req, res) {
         res.send(400, false);  
       }
     });
-  }*/
+  }
 };
 
 exports.insertGrades = function(req, res) {
