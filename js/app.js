@@ -3,7 +3,7 @@
 // define our application and pull in ngRoute and ngAnimate
 var animateApp = angular.module('animateApp', ['ngRoute', 'ngAnimate', 'amplify']);
 var totalGrades = {};
-var teamsArray = [1,2,3,4,5,6,7,8,9,10,11];
+var teamsArray = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18];
 var teamNow = 0;
 var userTeam = 0;
 
@@ -94,6 +94,48 @@ animateApp.config(function($routeProvider) {
         // team11
         .when('/11', {
             template: '<team11-directive></team11-directive>',
+            controller: 'mainController'
+        })
+
+        // team12
+        .when('/12', {
+            template: '<team12-directive></team12-directive>',
+            controller: 'mainController'
+        })
+
+        // team13
+        .when('/13', {
+            template: '<team13-directive></team13-directive>',
+            controller: 'mainController'
+        })
+
+        // team14
+        .when('/14', {
+            template: '<team14-directive></team14-directive>',
+            controller: 'mainController'
+        })
+
+        // team15
+        .when('/15', {
+            template: '<team15-directive></team15-directive>',
+            controller: 'mainController'
+        })
+
+        // team16
+        .when('/16', {
+            template: '<team16-directive></team16-directive>',
+            controller: 'mainController'
+        })
+
+        // team17
+        .when('/17', {
+            template: '<team17-directive></team17-directive>',
+            controller: 'mainController'
+        })
+
+        // team18
+        .when('/18', {
+            template: '<team18-directive></team18-directive>',
             controller: 'mainController'
         })
 
@@ -207,11 +249,67 @@ animateApp.directive('team11Directive', function () {
   }; 
 });  
 
+animateApp.directive('team12Directive', function () {
+  return {
+    restrict: 'E',
+    scope: true,
+    templateUrl: './html/page-team12.html'
+  }; 
+});  
+
+animateApp.directive('team13Directive', function () {
+  return {
+    restrict: 'E',
+    scope: true,
+    templateUrl: './html/page-team13.html'
+  }; 
+});  
+
+animateApp.directive('team14Directive', function () {
+  return {
+    restrict: 'E',
+    scope: true,
+    templateUrl: './html/page-team14.html'
+  }; 
+});  
+
+animateApp.directive('team15Directive', function () {
+  return {
+    restrict: 'E',
+    scope: true,
+    templateUrl: './html/page-team15.html'
+  }; 
+});  
+
+animateApp.directive('team16Directive', function () {
+  return {
+    restrict: 'E',
+    scope: true,
+    templateUrl: './html/page-team16.html'
+  }; 
+});  
+
+animateApp.directive('team17Directive', function () {
+  return {
+    restrict: 'E',
+    scope: true,
+    templateUrl: './html/page-team17.html'
+  }; 
+});  
+
+animateApp.directive('team18Directive', function () {
+  return {
+    restrict: 'E',
+    scope: true,
+    templateUrl: './html/page-team18.html'
+  }; 
+});  
+
 // CONTROLLERS ============================================
 // login controller
 animateApp.controller('loginController', function($scope, $http, $window, localStorage, $location, $rootScope) {
     totalGrades = {};
-    teamsArray = [1,2,3,4,5,6,7,8,9,10,11];
+    teamsArray = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18];
     userTeam = 0;
     if($window.orientation === undefined){}
     else{
@@ -406,16 +504,3 @@ animateApp.controller('doneController', function($scope) {
     amplify.store("User", null);
     $scope.pageClass = 'page-done';
 });
-
-/*
-Quitar Items
-Constantes de Materiales por Item
-
-Auxiliar Presupuesto
--Totalidad Materiales
-    -Mano Obra
-    -Costo Materiales
--Resumen de Presupuesto
-    -Cargas Sociales 0.43 por Mano de Obra por Contratos
-    -Miscelaneos 
-*/

@@ -38,9 +38,12 @@ body{
     background-size: 100% 100% !important;
     background-attachment: fixed  !important;
 }
-h1, h2, h3, h4, label{
+h1, h2, h3, h4, label, li, ul{
     font-family: GOTHIC;
     
+}
+li, ul{
+  text-align: left;
 }
 img{
   max-width: 80%;
@@ -376,9 +379,15 @@ select{
 }
 .thank-points{
     font-family: GOTHIC;
-    width: 50%;
+    width: 80%;
     margin: auto;
     padding-top: 15px
+}
+.rules-points{
+    font-family: GOTHIC;
+    width: 80%;
+    margin: auto;
+    padding-top: 5px
 }
 @media (max-width: 699px){
   .img-points{
