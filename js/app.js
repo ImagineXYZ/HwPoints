@@ -473,7 +473,6 @@ animateApp.controller('mainController', function($scope, $http, $window, localSt
                     $http.post("grade", body)
                         .success(function(data, status, headers, config) {
                             $scope.data = data;
-                            alert('Datos Enviados.');
                             $location.path('done');
                     }).error(function(data, status, headers, config) {
                             if(status){
