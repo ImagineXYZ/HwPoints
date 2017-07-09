@@ -16,6 +16,7 @@ var uristring =
   'mongodb://localhost/HW-Points';
 
 var db;
+var judgesGrades = {'1':0,'2':0,'3':0,'4':0,'5':0,'6':0,'7':0,'8':0,'9':0,'10':0,'11':0};
 
 mongo.MongoClient.connect(uristring, function(err, database) {
     if(!err) {
@@ -28,8 +29,6 @@ mongo.MongoClient.connect(uristring, function(err, database) {
 });
 
 var key = 'HW_R0CKS16';
-
-
 
 exports.insertUser = function(req, res) {
   var resource = req.body;
@@ -87,20 +86,30 @@ exports.loginUser = function(req, res) {
   }
 };
 
+
+exports.getGrades = function(req, res) {
+  db.collection('Total').findOne({}, function(error, doc_grades){
+      if(error) {throw error;res.send(400, error);};
+      res.send(200, doc_grades);
+  })
+}
+
 exports.insertGrades = function(req, res) {
-  console.log(req.body);
-  var userId = req.body.user._id;
+  //res.send(200,true);
+  var userId = req.body.user.id;
   var grades = req.body.grades;
-  db.collection('Users').findAndModify({_id:userId},{},{$inc:{sent:1}, $set:{grades:grades}},function(err, doc) {
+  grades['id'] = req.body.user.id;
+  db.collection('Judges').findAndModify({_id:userId},{},{$inc:{sent:1}},{upsert:true},function(err, doc) {
       if(err) {throw err;res.send(400, err);}
-      else if(doc.value.sent>0){res.send(403, {'error':'Multiple Calificación'});}
+      else if(doc.value != null){res.send(403, {'error':'Multiple Calificación'});}
       else{
-        db.collection('Ids').findAndModify({_id:1},{},{$inc:{grades:1}},function(err_ids, doc_ids) {
-            console.log(doc.value);
+        Object.keys(req.body.judge).forEach(function (i) {
+          judgesGrades[i] += req.body.judge[i];
+        })
+        db.collection('Grades').insert(grades,function(err_ids, doc_grades) {
             if(err_ids) {throw err_ids;res.send(400, err_ids);}
             else{
-              grades['_id'] = doc_ids.value.grades;
-              db.collection('Grades').insert(grades, function(error, doc_grades){
+              db.collection('Total').findAndModify({_id:1},{},{$set:{total:judgesGrades}},{upsert:true}, function(error, doc_grades){
                   if(error) {throw error;res.send(400, error);};
                   res.send(200, grades);
               })

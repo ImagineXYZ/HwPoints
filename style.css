@@ -25,7 +25,7 @@ body{
     left:0;
     height: 100%;
     width: 100%;
-    background: url(./img/back.png);
+    background: url(./img/back-mobile.png);
     background-repeat: no-repeat;
     background-size: 100% 100%;
     background-attachment: fixed;
@@ -48,19 +48,20 @@ li, ul{
 img{
   max-width: 80%;
 }
+.img-responsive{
+  width: 90%;
+  margin:auto;
+}
 .img-imagine{
   margin-bottom: 25px;
 }
 .page
 {
     text-align:center;
-    width: 55vw;
+    width: 80%;
     margin: auto;
-    background: black; /* For browsers that do not support gradients */
-    background: -webkit-linear-gradient(left, #333333, #1a1a1a); /* For Safari 5.1 to 6.0 */
-    background: -o-linear-gradient(right, #333333, #1a1a1a); /* For Opera 11.1 to 12.0 */
-    background: -moz-linear-gradient(right, #333333, #1a1a1a); /* For Firefox 3.6 to 15 */
-    background: linear-gradient(to right, #333333, #1a1a1a); /* Standard syntax (must be last) */
+    background: #333333; /* For browsers that do not support gradients */
+    background: rgba(51,51,51,0.6)/* Standard syntax (must be last) */
 }
 .page-login, .page-done, .page-home{
     background: transparent;
@@ -332,7 +333,7 @@ select{
   stroke-dashoffset: -1395;
 }
 .buttton-points{
-    width: 20vw;
+    width: 300px;
     height: 40px;
     font-size: 20px;
     color: white;
@@ -345,7 +346,7 @@ select{
     background: linear-gradient(to right, #F13A2A, #F15D2A); /* Standard syntax (must be last) */
 }
 .input-points{
-    width: 20vw;
+    width: 300px;
     height: 40px;
     margin-top: 10px;
     margin-bottom: 10px;
@@ -366,14 +367,14 @@ select{
       linear-gradient(to right, #F13A2A, #F15D2A) 1; 
 }
 .img-points{
-    width: 10vw;
+    width: 150px;
     min-width: 100px;
-    margin-bottom: 15vh;
+    margin-bottom: 10vh;
 }
 .title-points{
     font-family: GOTHIC;
     border-bottom: orange 1px solid;
-    width: 50%;
+    width: 100%;
     margin: auto;
     padding-top: 25px
 }

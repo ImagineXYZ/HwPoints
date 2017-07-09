@@ -21,12 +21,13 @@ app.use(express.static(__dirname));
 app.post('/users', dbServices.insertUser);
 app.post('/grade', dbServices.insertGrades);
 app.post('/login', dbServices.loginUser);
+app.get('/grades', dbServices.getGrades);
 
 app.get('*', function (req, res) {
     res.redirect('../#home', 404);
 });
 
 // Listening port
-var port = Number(process.env.PORT || 8080);
+var port = Number(process.env.PORT || 3000);
 app.listen(port);
 console.log('Listening on port ' + port + '...');

@@ -3,9 +3,10 @@
 // define our application and pull in ngRoute and ngAnimate
 var animateApp = angular.module('animateApp', ['ngRoute', 'ngAnimate', 'amplify']);
 var totalGrades = {};
-var teamsArray = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18];
+var judgesGrades = {};
+var teamsArray = [1,2,3,4,5,6,7,8,9,10,11];
 var teamNow = 0;
-var userTeam = 0;
+var juryQuantity = 3;
 
 // ROUTING ===============================================
 // set our routing for this application
@@ -309,12 +310,8 @@ animateApp.directive('team18Directive', function () {
 // login controller
 animateApp.controller('loginController', function($scope, $http, $window, localStorage, $location, $rootScope) {
     totalGrades = {};
-    teamsArray = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18];
-    userTeam = 0;
-    if($window.orientation === undefined){}
-    else{
-        $rootScope.bodylayout = 'mobile'; 
-    }
+    teamsArray = [1,2,3,4,5,6,7,8,9,10,11];
+    $rootScope.bodylayout = 'mobile'; 
     $scope.user = {};
     $window.scrollTo(0, 0);
     $scope.pageClass = 'page-login';
@@ -322,28 +319,29 @@ animateApp.controller('loginController', function($scope, $http, $window, localS
     amplify.store("User", null);
 
     $scope.loginUser = function(){
-        console.log($scope.user);
-        $http.post("login", $scope.user)
-            .success(function(data, status, headers, config) {
-                if(data.sent === 0){
-                    console.log(data);
-                    $scope.data = data;
-                    userTeam = data.team;
-                    teamsArray.splice(userTeam-1,1);
-                    data.team = '¿?';
-                    amplify.store("User", data);
-                    $location.path('home');
-                }
-                else{
-                    console.log(data);
-                    $scope.user = {};
-                    alert('Éste usuario ya realizó la calificación.');
-                }
-        }).error(function(data, status, headers, config) {
-                console.log(data);
-                alert('Datos Erroneos.');
-                $scope.status = status;
-        });
+        if($scope.user.email == "bmurray" && $scope.user.pass == "bmurray"){
+            $scope.user['id'] = 1;
+            amplify.store("User", $scope.user);
+            $location.path('home');
+        }
+        else if($scope.user.email == "mcoffey" && $scope.user.pass == "mcoffey"){
+            $scope.user['id'] = 2;
+            amplify.store("User", $scope.user);
+            $location.path('home');
+        }
+        else if($scope.user.email == "eoviedo" && $scope.user.pass == "eoviedo"){
+            $scope.user['id'] = 3;
+            amplify.store("User", $scope.user);
+            $location.path('home');
+        }
+        else if($scope.user.email == "ofuks" && $scope.user.pass == "ofuks"){
+            $scope.user['id'] = 4;
+            amplify.store("User", $scope.user);
+            $location.path('home');
+        }
+        else{
+            alert('Usuario o contraseña erroneas;');
+        }
     };
 });
 
@@ -364,133 +362,127 @@ animateApp.controller('mainController', function($scope, $http, $window, localSt
     var user = amplify.store("User");
     if(user){
         var locationTeam = parseInt($location.path().split('/')[1]);
-        if(locationTeam === userTeam){
-            alert('HACER TRAMPA ES MALO -.-');
-            var nextPath = ''+teamNow+'';
-            $location.path(nextPath);
-        }
-        else if(locationTeam < teamNow){
-            alert('No es posible modificar una calificación ya guardada');
-            var nextPath = ''+teamNow+'';
-            $location.path(nextPath);
-            $timeout(function () {
-                $window.scrollTo(0, 0);
-            }, 500);
-        }
+        $window.scrollTo(0, 0);
+        $scope.pageClass = 'page-'+locationTeam;
+        //if($window.orientation === undefined){
+            $scope.mobileHidden = 'hidden';
+        /*}
         else{
-            $window.scrollTo(0, 0);
-            $scope.pageClass = 'page-'+locationTeam;
-            if($window.orientation === undefined){
-                $scope.mobileHidden = 'hidden';
+            $scope.pcHidden = 'hidden';   
+        }*/
+        $scope.modelGrade = 1;
+        $scope.pitchGrade = 1;
+        $scope.impactGrade = 1;
+        $scope.innovationGrade = 1;
+        $scope.functionalGrade = 1;
+        $scope.getGrade = function(selector){
+            switch(selector){
+                case 1:
+                    return $scope.modelGrade;
+                    break;
+                case 2:
+                    return $scope.pitchGrade;
+                    break;
+                case 3:
+                    return $scope.impactGrade;
+                    break;
+                case 4:
+                    return $scope.innovationGrade;
+                    break;
+                case 5:
+                    return $scope.functionalGrade;
+                    break;
+                default:
+                    return 1;
+            }
+        };
+        $scope.setGrade = function(grade, selector){
+            switch(selector){
+                case 1:
+                    $scope.modelGrade = grade;
+                    break;
+                case 2:
+                    $scope.pitchGrade = grade;
+                    break;
+                case 3:
+                    $scope.impactGrade = grade;
+                    break;
+                case 4:
+                    $scope.innovationGrade = grade;
+                    break;
+                case 5:
+                    $scope.functionalGrade = grade;
+                    break;
+                default:
+                    return 1;
+            }
+        };
+
+        $scope.isRange = function(number, selector){
+            switch(selector){
+                case 1:
+                    return number === $scope.modelGrade;
+                    break;
+                case 2:
+                    return number === $scope.pitchGrade;
+                    break;
+                case 3:
+                    return number === $scope.impactGrade;
+                    break;
+                case 4:
+                    return number === $scope.innovationGrade;
+                    break;
+                case 5:
+                    return number === $scope.functionalGrade;
+                    break;
+                default:
+                    return false;
+            }
+        };
+        $scope.rangeCheck = function(event, selector){
+            var pos = Math.ceil(event.offsetX / (545 / 10));
+            switch(selector){
+                case 1:
+                    $scope.modelGrade = pos;
+                    break;
+                case 2:
+                    $scope.pitchGrade = pos;
+                    break;
+                case 3:
+                    $scope.impactGrade = pos;
+                    break;
+                case 4:
+                    $scope.innovationGrade = pos;
+                    break;
+                case 5:
+                    $scope.functionalGrade = pos;
+                    break;
+                default:
+                    return false;
+            }
+        };
+        $scope.next = function(path){
+            var locationGrades = {modelGrade:$scope.modelGrade, pitchGrade:$scope.pitchGrade, impactGrade:$scope.impactGrade, innovationGrade:$scope.innovationGrade, functionalGrade:$scope.functionalGrade,totalGrade:($scope.modelGrade + $scope.pitchGrade + $scope.impactGrade + $scope.innovationGrade + $scope.functionalGrade),percentageGrade:($scope.modelGrade + $scope.pitchGrade + $scope.impactGrade + $scope.innovationGrade + $scope.functionalGrade)*2,judgeGrade:(($scope.modelGrade + $scope.pitchGrade + $scope.impactGrade + $scope.innovationGrade + $scope.functionalGrade)*1.6)/juryQuantity};
+            totalGrades[locationTeam]=locationGrades;
+            judgesGrades[locationTeam] = locationGrades.judgeGrade;
+            if(teamsArray.length === 0){
+                user['grades'] = totalGrades;
+                user['judge'] = judgesGrades;
+                var body = {user:user, grades:totalGrades, judge:judgesGrades};
+                $http.post("grade", body)
+                    .success(function(data, status, headers, config) {
+                        $scope.data = data;
+                        $location.path('done');
+                }).error(function(data, status, headers, config) {
+                        alert('Datos No Enviados. Por Favor Intente de Nuevo');
+                });
             }
             else{
-                $scope.pcHidden = 'hidden';   
+                teamNow = teamsArray.shift();
+                var nextPath = ''+teamNow+'';
+                $location.path(nextPath);
             }
-            $scope.attitudeGrade = 1;
-            $scope.dataGrade = 1;
-            $scope.videoGrade = 1;
-            $scope.functionalGrade = 1;
-            $scope.getGrade = function(selector){
-                switch(selector){
-                    case 1:
-                        return $scope.attitudeGrade;
-                        break;
-                    case 2:
-                        return $scope.dataGrade;
-                        break;
-                    case 3:
-                        return $scope.videoGrade;
-                        break;
-                    case 4:
-                        return $scope.functionalGrade;
-                        break;
-                    default:
-                        return 1;
-                }
-            };
-            $scope.setGrade = function(grade, selector){
-                switch(selector){
-                    case 1:
-                        $scope.attitudeGrade = grade;
-                        break;
-                    case 2:
-                        $scope.dataGrade = grade;
-                        break;
-                    case 3:
-                        $scope.videoGrade = grade;
-                        break;
-                    case 4:
-                        $scope.functionalGrade = grade;
-                        break;
-                    default:
-                        return 1;
-                }
-            };
-
-            $scope.isRange = function(number, selector){
-                switch(selector){
-                    case 1:
-                        return number === $scope.attitudeGrade;
-                        break;
-                    case 2:
-                        return number === $scope.dataGrade;
-                        break;
-                    case 3:
-                        return number === $scope.videoGrade;
-                        break;
-                    case 4:
-                        return number === $scope.functionalGrade;
-                        break;
-                    default:
-                        return false;
-                }
-            };
-            $scope.rangeCheck = function(event, selector){
-                var pos = Math.ceil(event.offsetX / (545 / 10));
-                switch(selector){
-                    case 1:
-                        $scope.attitudeGrade = pos;
-                        break;
-                    case 2:
-                        $scope.dataGrade = pos;
-                        break;
-                    case 3:
-                        $scope.videoGrade = pos;
-                        break;
-                    case 4:
-                        $scope.functionalGrade = pos;
-                        break;
-                    default:
-                        return false;
-                }
-            };
-            $scope.next = function(path){
-                var locationGrades = {attitudeGrade:$scope.attitudeGrade/2, dataGrade:$scope.dataGrade/2, videoGrade:$scope.videoGrade/2, functionalGrade:$scope.functionalGrade, totalGrade:($scope.attitudeGrade/2 + $scope.dataGrade/2 + $scope.videoGrade/2 + $scope.functionalGrade)};
-                totalGrades[locationTeam]=locationGrades;
-                if(teamsArray.length === 0){
-                    user['grades'] = totalGrades;
-                    var body = {user:user, grades:totalGrades};
-                    $http.post("grade", body)
-                        .success(function(data, status, headers, config) {
-                            $scope.data = data;
-                            $location.path('done');
-                    }).error(function(data, status, headers, config) {
-                            if(status){
-                                alert('Éste usuario ya envió su calificación');
-                                $location.path('login');
-                            }
-                            else{
-                                alert('Datos No Enviados. Por Favor Intente de Nuevo');
-                            }
-                    });
-                }
-                else{
-                    teamNow = teamsArray.shift();
-                    var nextPath = ''+teamNow+'';
-                    $location.path(nextPath);
-                }
-            };
-        }
+        };
     }
     else{
         $location.path('login');

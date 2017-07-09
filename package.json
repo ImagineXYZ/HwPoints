@@ -2,10 +2,10 @@
   "name": "Angular",
   "version": "0.2.0",
   "description": "Angular",
-  "main": "app.js",
+  "main": "server.js",
   "engines" : { 
-      "node" : "0.10.31",
-      "npm" : ">=1.4"
+      "node" : "6.11.0",
+      "npm" : "3.10.10"
   },
   "authors": [ "Adrián Sánchez"],
   "dependencies": {
