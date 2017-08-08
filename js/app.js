@@ -256,28 +256,10 @@ animateApp.controller('loginController', function($scope, $http, $window, localS
     amplify.store("User", null);
 
     $scope.loginUser = function(){
-        if($scope.user.email == "mburman" && $scope.user.pass == "mburman"){
-            $scope.user['id'] = 4;
+        if($scope.user.email == $scope.user.pass){
+            $scope.user['id'] = $scope.user.email;
             amplify.store("User", $scope.user);
             $location.path('home');
-        }
-        else if($scope.user.email == "crodriguez" && $scope.user.pass == "crodriguez"){
-            $scope.user['id'] = 2;
-            amplify.store("User", $scope.user);
-            $location.path('home');
-        }
-        else if($scope.user.email == "cgohmann" && $scope.user.pass == "cgohmann"){
-            $scope.user['id'] = 3;
-            amplify.store("User", $scope.user);
-            $location.path('home');
-        }
-        else if($scope.user.email == "jalfaro" && $scope.user.pass == "jalfaro"){
-            $scope.user['id'] = 1;
-            amplify.store("User", $scope.user);
-            $location.path('home');
-        }
-        else{
-            alert('Usuario o contraseña erroneas;');
         }
     };
 });
@@ -300,42 +282,6 @@ animateApp.controller('mainController', function($scope, $http, $window, localSt
         $window.scrollTo(0, 0);
         $scope.pageClass = 'page-'+locationTeam;
         $scope.mobileHidden = 'hidden';
-        $scope.getGrade = function(selector){
-            switch(selector){
-                case 1:
-                    return $scope.modelGrade;
-                    break;
-                case 2:
-                    return $scope.pitchGrade;
-                    break;
-                case 3:
-                    return $scope.impactGrade;
-                    break;
-                case 4:
-                    return $scope.innovationGrade;
-                    break;
-                default:
-                    return 1;
-            }
-        };
-        $scope.setGrade = function(grade, selector){
-            switch(selector){
-                case 1:
-                    $scope.modelGrade = grade;
-                    break;
-                case 2:
-                    $scope.pitchGrade = grade;
-                    break;
-                case 3:
-                    $scope.impactGrade = grade;
-                    break;
-                case 4:
-                    $scope.innovationGrade = grade;
-                    break;
-                default:
-                    return 1;
-            }
-        };
         $scope.pitchChange = function(num){
             $scope.pitchGrade = parseInt(num);
         };
