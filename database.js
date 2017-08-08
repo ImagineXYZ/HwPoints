@@ -44,34 +44,34 @@ exports.getGrades = function(req, res) {
                   db.collection('Judge4').find({}).toArray(function(error4, doc4){
                       if(error3) {throw error3;res.send(400, error3);}
                       else{
-                        db.collection('Judge5').find({}).toArray(function(error4, doc4){
+                        db.collection('Judge5').find({}).toArray(function(error5, doc5){
                             if(error3) {throw error3;res.send(400, error3);}
                             else{
-                              db.collection('Judge6').find({}).toArray(function(error4, doc4){
+                              db.collection('Judge6').find({}).toArray(function(error6, doc6){
                                   if(error3) {throw error3;res.send(400, error3);}
                                   else{
-                                    db.collection('Judge7').find({}).toArray(function(error4, doc4){
+                                    db.collection('Judge7').find({}).toArray(function(error7, doc7){
                                         if(error3) {throw error3;res.send(400, error3);}
                                         else{
-                                          db.collection('Judge8').find({}).toArray(function(error4, doc4){
+                                          db.collection('Judge8').find({}).toArray(function(error8, doc8){
                                               if(error3) {throw error3;res.send(400, error3);}
                                               else{
-                                                db.collection('Judge9').find({}).toArray(function(error4, doc4){
+                                                db.collection('Judge9').find({}).toArray(function(error9, doc9){
                                                     if(error3) {throw error3;res.send(400, error3);}
                                                     else{
-                                                      db.collection('Judge10').find({}).toArray(function(error4, doc4){
+                                                      db.collection('Judge10').find({}).toArray(function(error10, doc10){
                                                           if(error3) {throw error3;res.send(400, error3);}
                                                           else{
-                                                            db.collection('Judge11').find({}).toArray(function(error4, doc4){
+                                                            db.collection('Judge11').find({}).toArray(function(error11, doc11){
                                                                 if(error3) {throw error3;res.send(400, error3);}
                                                                 else{
-                                                                  db.collection('Judge12').find({}).toArray(function(error4, doc4){
+                                                                  db.collection('Judge12').find({}).toArray(function(error12, doc12){
                                                                       if(error3) {throw error3;res.send(400, error3);}
                                                                       else{
-                                                                        db.collection('Judge13').find({}).toArray(function(error4, doc4){
+                                                                        db.collection('Judge13').find({}).toArray(function(error13, doc13){
                                                                             if(error3) {throw error3;res.send(400, error3);}
                                                                             else{
-                                                                              db.collection('Judge14').find({}).toArray(function(error4, doc4){
+                                                                              db.collection('Judge14').find({}).toArray(function(error14, doc14){
                                                                                   if(error3) {throw error3;res.send(400, error3);}
                                                                                   else{
                                                                                     doc1.forEach(function (grade) {
