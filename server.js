@@ -18,9 +18,7 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json());
 app.use(express.static(__dirname));
 
-app.post('/users', dbServices.insertUser);
 app.post('/grade', dbServices.insertGrades);
-app.post('/login', dbServices.loginUser);
 app.get('/grades', dbServices.getGrades);
 
 app.get('*', function (req, res) {

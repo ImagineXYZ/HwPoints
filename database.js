@@ -16,7 +16,6 @@ var uristring =
   'mongodb://localhost/HW-Points';
 
 var db;
-var judgesGrades = {'1':0,'2':0,'3':0,'4':0,'5':0,'6':0,'7':0,'8':0,'9':0,'10':0,'11':0};
 
 mongo.MongoClient.connect(uristring, function(err, database) {
     if(!err) {
@@ -30,91 +29,134 @@ mongo.MongoClient.connect(uristring, function(err, database) {
 
 var key = 'HW_R0CKS16';
 
-exports.insertUser = function(req, res) {
-  var resource = req.body;
-  var cipher = crypto.createCipher('aes-256-cbc', key);
-  cipher.update(resource.pass, 'utf8', 'base64');
-  var pass = cipher.final('base64');
-  db.collection('Ids').findAndModify({_id:1},{},{$inc:{users:1}},function(err, doc_ids) {
-    if(err) {throw err;res.send(400, err);};
-    resource["_id"] = doc_ids.value.users;
-    resource["pass"] = pass;
-    db.collection('Users').insert(resource, function(error, doc_project){
-        if(error) {throw error;res.send(400, error);};
-        res.send(200, resource);
-    })
-  });
-};
-
-
-exports.loginUser = function(req, res) {
-  var resource = req.body;
-  if(resource.email === undefined || resource.pass === undefined){
-    res.send(400, false);
-  }
-  else{
-    db.collection('Users').findOne({email:resource.email},function(err, doc) {
-      if(err) {
-        throw err;
-        res.send(400, err);
-      }
-      else if(doc != null){
-        var cipher = crypto.createCipher('aes-256-cbc', key);
-        cipher.update(resource.pass, 'utf8', 'base64');
-        var pass = cipher.final('base64');
-        if(doc.pass === pass){
-          var userId = doc._id;
-          db.collection('Users').update({_id:userId}, {$inc:{logged:1}}, {upsert: true},function(err2, doc2) {
-            if(err2) {
-              throw err2;
-              res.send(400, err2);
-            }
-            else{
-              doc.pass = '##############';
-              res.send(200, doc);
-            }
-          });
-        }
-        else{
-          res.send(400, false);  
-        }
-      }
-      else{
-        res.send(400, false);  
-      }
-    });
-  }
-};
-
-
 exports.getGrades = function(req, res) {
-  db.collection('Total').findOne({}, function(error, doc_grades){
-      if(error) {throw error;res.send(400, error);};
-      res.send(200, doc_grades);
-  })
+  var totalGrades = {1:0,2:0,3:0,4:0,5:0,6:0,7:0,8:0,9:0,10:0,11:0,12:0,13:0,14:0};
+  var judgeCount = 14;
+  db.collection('Judge1').find({}).toArray(function(error1, doc1){
+    if(error1) {throw error1;res.send(400, error1);}
+    else{
+      db.collection('Judge2').find({}).toArray(function(error2, doc2){
+          if(error2) {throw error2;res.send(400, error2);}
+          else{
+            db.collection('Judge3').find({}).toArray(function(error3, doc3){
+                if(error3) {throw error3;res.send(400, error3);}
+                else{
+                  db.collection('Judge4').find({}).toArray(function(error4, doc4){
+                      if(error3) {throw error3;res.send(400, error3);}
+                      else{
+                        db.collection('Judge5').find({}).toArray(function(error4, doc4){
+                            if(error3) {throw error3;res.send(400, error3);}
+                            else{
+                              db.collection('Judge6').find({}).toArray(function(error4, doc4){
+                                  if(error3) {throw error3;res.send(400, error3);}
+                                  else{
+                                    db.collection('Judge7').find({}).toArray(function(error4, doc4){
+                                        if(error3) {throw error3;res.send(400, error3);}
+                                        else{
+                                          db.collection('Judge8').find({}).toArray(function(error4, doc4){
+                                              if(error3) {throw error3;res.send(400, error3);}
+                                              else{
+                                                db.collection('Judge9').find({}).toArray(function(error4, doc4){
+                                                    if(error3) {throw error3;res.send(400, error3);}
+                                                    else{
+                                                      db.collection('Judge10').find({}).toArray(function(error4, doc4){
+                                                          if(error3) {throw error3;res.send(400, error3);}
+                                                          else{
+                                                            db.collection('Judge11').find({}).toArray(function(error4, doc4){
+                                                                if(error3) {throw error3;res.send(400, error3);}
+                                                                else{
+                                                                  db.collection('Judge12').find({}).toArray(function(error4, doc4){
+                                                                      if(error3) {throw error3;res.send(400, error3);}
+                                                                      else{
+                                                                        db.collection('Judge13').find({}).toArray(function(error4, doc4){
+                                                                            if(error3) {throw error3;res.send(400, error3);}
+                                                                            else{
+                                                                              db.collection('Judge14').find({}).toArray(function(error4, doc4){
+                                                                                  if(error3) {throw error3;res.send(400, error3);}
+                                                                                  else{
+                                                                                    doc1.forEach(function (grade) {
+                                                                                      totalGrades[grade.team] += parseInt(grade.grades.totalGrades)/judgeCount;
+                                                                                    })
+                                                                                    doc2.forEach(function (grade) {
+                                                                                      totalGrades[grade.team] += parseInt(grade.grades.totalGrades)/judgeCount;
+                                                                                    })
+                                                                                    doc3.forEach(function (grade) {
+                                                                                      totalGrades[grade.team] += parseInt(grade.grades.totalGrades)/judgeCount;
+                                                                                    })
+                                                                                    doc4.forEach(function (grade) {
+                                                                                      totalGrades[grade.team] += parseInt(grade.grades.totalGrades)/judgeCount;
+                                                                                    })
+                                                                                    doc5.forEach(function (grade) {
+                                                                                      totalGrades[grade.team] += parseInt(grade.grades.totalGrades)/judgeCount;
+                                                                                    })
+                                                                                    doc6.forEach(function (grade) {
+                                                                                      totalGrades[grade.team] += parseInt(grade.grades.totalGrades)/judgeCount;
+                                                                                    })
+                                                                                    doc7.forEach(function (grade) {
+                                                                                      totalGrades[grade.team] += parseInt(grade.grades.totalGrades)/judgeCount;
+                                                                                    })
+                                                                                    doc8.forEach(function (grade) {
+                                                                                      totalGrades[grade.team] += parseInt(grade.grades.totalGrades)/judgeCount;
+                                                                                    })
+                                                                                    doc9.forEach(function (grade) {
+                                                                                      totalGrades[grade.team] += parseInt(grade.grades.totalGrades)/judgeCount;
+                                                                                    })
+                                                                                    doc10.forEach(function (grade) {
+                                                                                      totalGrades[grade.team] += parseInt(grade.grades.totalGrades)/judgeCount;
+                                                                                    })
+                                                                                    doc11.forEach(function (grade) {
+                                                                                      totalGrades[grade.team] += parseInt(grade.grades.totalGrades)/judgeCount;
+                                                                                    })
+                                                                                    doc12.forEach(function (grade) {
+                                                                                      totalGrades[grade.team] += parseInt(grade.grades.totalGrades)/judgeCount;
+                                                                                    })
+                                                                                    doc13.forEach(function (grade) {
+                                                                                      totalGrades[grade.team] += parseInt(grade.grades.totalGrades)/judgeCount;
+                                                                                    })
+                                                                                    doc14.forEach(function (grade) {
+                                                                                      totalGrades[grade.team] += parseInt(grade.grades.totalGrades)/judgeCount;
+                                                                                    })
+                                                                                    setTimeout(function() {
+                                                                                      res.send(totalGrades);
+                                                                                    }, 500);
+                                                                                  }
+                                                                              });
+                                                                            }
+                                                                        });
+                                                                      }
+                                                                  });
+                                                                }
+                                                            });
+                                                          }
+                                                      });
+                                                    }
+                                                });
+                                              }
+                                          });
+                                        }
+                                    });
+                                  }
+                              });
+                            }
+                        });
+                      }
+                  });
+                }
+            });
+          }
+      });
+    }
+  });
 }
 
 exports.insertGrades = function(req, res) {
-  //res.send(200,true);
-  var userId = req.body.user.id;
-  var grades = req.body.grades;
-  grades['id'] = req.body.user.id;
-  db.collection('Judges').findAndModify({_id:userId},{},{$inc:{sent:1}},{upsert:true},function(err, doc) {
+  var userCollection = 'Judge'+req.body.judge,
+    teamId = req.body.team,
+    newGrades = req.body;
+  db.collection(userCollection).findAndModify({team:teamId},{},{$set:newGrades},{upsert:true},function(err, doc) {
       if(err) {throw err;res.send(400, err);}
-      else if(doc.value != null){res.send(403, {'error':'Multiple Calificación'});}
       else{
-        Object.keys(req.body.judge).forEach(function (i) {
-          judgesGrades[i] += req.body.judge[i];
-        })
-        db.collection('Grades').insert(grades,function(err_ids, doc_grades) {
-            if(err_ids) {throw err_ids;res.send(400, err_ids);}
-            else{
-              db.collection('Total').findAndModify({_id:1},{},{$set:{total:judgesGrades}},{upsert:true}, function(error, doc_grades){
-                  if(error) {throw error;res.send(400, error);};
-                  res.send(200, grades);
-              })
-            }
-        });
+        res.send(200,req.body);
       }
   });
 }

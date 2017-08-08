@@ -2,11 +2,6 @@
 
 // define our application and pull in ngRoute and ngAnimate
 var animateApp = angular.module('animateApp', ['ngRoute', 'ngAnimate', 'amplify']);
-var totalGrades = {};
-var judgesGrades = {};
-var teamsArray = [1,2,3,4,5,6,7,8,9,10,11];
-var teamNow = 0;
-var juryQuantity = 3;
 
 // ROUTING ===============================================
 // set our routing for this application
@@ -113,30 +108,6 @@ animateApp.config(function($routeProvider) {
         // team14
         .when('/14', {
             template: '<team14-directive></team14-directive>',
-            controller: 'mainController'
-        })
-
-        // team15
-        .when('/15', {
-            template: '<team15-directive></team15-directive>',
-            controller: 'mainController'
-        })
-
-        // team16
-        .when('/16', {
-            template: '<team16-directive></team16-directive>',
-            controller: 'mainController'
-        })
-
-        // team17
-        .when('/17', {
-            template: '<team17-directive></team17-directive>',
-            controller: 'mainController'
-        })
-
-        // team18
-        .when('/18', {
-            template: '<team18-directive></team18-directive>',
             controller: 'mainController'
         })
 
@@ -274,43 +245,9 @@ animateApp.directive('team14Directive', function () {
   }; 
 });  
 
-animateApp.directive('team15Directive', function () {
-  return {
-    restrict: 'E',
-    scope: true,
-    templateUrl: './html/page-team15.html'
-  }; 
-});  
-
-animateApp.directive('team16Directive', function () {
-  return {
-    restrict: 'E',
-    scope: true,
-    templateUrl: './html/page-team16.html'
-  }; 
-});  
-
-animateApp.directive('team17Directive', function () {
-  return {
-    restrict: 'E',
-    scope: true,
-    templateUrl: './html/page-team17.html'
-  }; 
-});  
-
-animateApp.directive('team18Directive', function () {
-  return {
-    restrict: 'E',
-    scope: true,
-    templateUrl: './html/page-team18.html'
-  }; 
-});  
-
 // CONTROLLERS ============================================
 // login controller
 animateApp.controller('loginController', function($scope, $http, $window, localStorage, $location, $rootScope) {
-    totalGrades = {};
-    teamsArray = [1,2,3,4,5,6,7,8,9,10,11];
     $rootScope.bodylayout = 'mobile'; 
     $scope.user = {};
     $window.scrollTo(0, 0);
@@ -319,23 +256,23 @@ animateApp.controller('loginController', function($scope, $http, $window, localS
     amplify.store("User", null);
 
     $scope.loginUser = function(){
-        if($scope.user.email == "bmurray" && $scope.user.pass == "bmurray"){
-            $scope.user['id'] = 1;
+        if($scope.user.email == "mburman" && $scope.user.pass == "mburman"){
+            $scope.user['id'] = 4;
             amplify.store("User", $scope.user);
             $location.path('home');
         }
-        else if($scope.user.email == "mcoffey" && $scope.user.pass == "mcoffey"){
+        else if($scope.user.email == "crodriguez" && $scope.user.pass == "crodriguez"){
             $scope.user['id'] = 2;
             amplify.store("User", $scope.user);
             $location.path('home');
         }
-        else if($scope.user.email == "eoviedo" && $scope.user.pass == "eoviedo"){
+        else if($scope.user.email == "cgohmann" && $scope.user.pass == "cgohmann"){
             $scope.user['id'] = 3;
             amplify.store("User", $scope.user);
             $location.path('home');
         }
-        else if($scope.user.email == "ofuks" && $scope.user.pass == "ofuks"){
-            $scope.user['id'] = 4;
+        else if($scope.user.email == "jalfaro" && $scope.user.pass == "jalfaro"){
+            $scope.user['id'] = 1;
             amplify.store("User", $scope.user);
             $location.path('home');
         }
@@ -351,9 +288,7 @@ animateApp.controller('homeController', function($scope, $window, $location) {
     $scope.pageClass = 'page-home';
 
     $scope.next = function(path){
-        teamNow = teamsArray.shift();
-        var nextPath = ''+teamNow+'';
-        $location.path(nextPath);
+        $location.path(path);
     };
 });
 
@@ -364,17 +299,7 @@ animateApp.controller('mainController', function($scope, $http, $window, localSt
         var locationTeam = parseInt($location.path().split('/')[1]);
         $window.scrollTo(0, 0);
         $scope.pageClass = 'page-'+locationTeam;
-        //if($window.orientation === undefined){
-            $scope.mobileHidden = 'hidden';
-        /*}
-        else{
-            $scope.pcHidden = 'hidden';   
-        }*/
-        $scope.modelGrade = 1;
-        $scope.pitchGrade = 1;
-        $scope.impactGrade = 1;
-        $scope.innovationGrade = 1;
-        $scope.functionalGrade = 1;
+        $scope.mobileHidden = 'hidden';
         $scope.getGrade = function(selector){
             switch(selector){
                 case 1:
@@ -388,9 +313,6 @@ animateApp.controller('mainController', function($scope, $http, $window, localSt
                     break;
                 case 4:
                     return $scope.innovationGrade;
-                    break;
-                case 5:
-                    return $scope.functionalGrade;
                     break;
                 default:
                     return 1;
@@ -410,78 +332,27 @@ animateApp.controller('mainController', function($scope, $http, $window, localSt
                 case 4:
                     $scope.innovationGrade = grade;
                     break;
-                case 5:
-                    $scope.functionalGrade = grade;
-                    break;
                 default:
                     return 1;
             }
         };
-
-        $scope.isRange = function(number, selector){
-            switch(selector){
-                case 1:
-                    return number === $scope.modelGrade;
-                    break;
-                case 2:
-                    return number === $scope.pitchGrade;
-                    break;
-                case 3:
-                    return number === $scope.impactGrade;
-                    break;
-                case 4:
-                    return number === $scope.innovationGrade;
-                    break;
-                case 5:
-                    return number === $scope.functionalGrade;
-                    break;
-                default:
-                    return false;
-            }
+        $scope.pitchChange = function(num){
+            $scope.pitchGrade = parseInt(num);
         };
-        $scope.rangeCheck = function(event, selector){
-            var pos = Math.ceil(event.offsetX / (545 / 10));
-            switch(selector){
-                case 1:
-                    $scope.modelGrade = pos;
-                    break;
-                case 2:
-                    $scope.pitchGrade = pos;
-                    break;
-                case 3:
-                    $scope.impactGrade = pos;
-                    break;
-                case 4:
-                    $scope.innovationGrade = pos;
-                    break;
-                case 5:
-                    $scope.functionalGrade = pos;
-                    break;
-                default:
-                    return false;
-            }
+        $scope.modelChange = function(num){
+            $scope.modelGrade = parseInt(num);
         };
         $scope.next = function(path){
-            var locationGrades = {modelGrade:$scope.modelGrade, pitchGrade:$scope.pitchGrade, impactGrade:$scope.impactGrade, innovationGrade:$scope.innovationGrade, functionalGrade:$scope.functionalGrade,totalGrade:($scope.modelGrade + $scope.pitchGrade + $scope.impactGrade + $scope.innovationGrade + $scope.functionalGrade),percentageGrade:($scope.modelGrade + $scope.pitchGrade + $scope.impactGrade + $scope.innovationGrade + $scope.functionalGrade)*2,judgeGrade:(($scope.modelGrade + $scope.pitchGrade + $scope.impactGrade + $scope.innovationGrade + $scope.functionalGrade)*1.6)/juryQuantity};
-            totalGrades[locationTeam]=locationGrades;
-            judgesGrades[locationTeam] = locationGrades.judgeGrade;
-            if(teamsArray.length === 0){
-                user['grades'] = totalGrades;
-                user['judge'] = judgesGrades;
-                var body = {user:user, grades:totalGrades, judge:judgesGrades};
-                $http.post("grade", body)
-                    .success(function(data, status, headers, config) {
-                        $scope.data = data;
-                        $location.path('done');
-                }).error(function(data, status, headers, config) {
-                        alert('Datos No Enviados. Por Favor Intente de Nuevo');
-                });
-            }
-            else{
-                teamNow = teamsArray.shift();
-                var nextPath = ''+teamNow+'';
-                $location.path(nextPath);
-            }
+            var totalGrades = ($scope.modelGrade+$scope.pitchGrade)/2;
+            var locationGrades = {modelGrade:$scope.modelGrade, pitchGrade:$scope.pitchGrade, totalGrades:totalGrades};
+            var body = {judge:user.id, grades:locationGrades, team:locationTeam};
+            $http.post("grade", body)
+                .success(function(data, status, headers, config) {
+                    $scope.data = data;
+                    $location.path(path);
+            }).error(function(data, status, headers, config) {
+                    alert('Datos No Enviados. Por Favor Intente de Nuevo');
+            });
         };
     }
     else{
